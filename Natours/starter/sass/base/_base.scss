@@ -1,0 +1,18 @@
+/* add ::after and ::before otherwise the universal selector ("global reset") only applies to elements */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* using the inherit keyword as a universal value will mean that every element will inherit the border-box value that is declared in the body declaration; */
+  box-sizing: inherit;
+}
+
+html {
+  // defines what 1rem is for the entire app, so leave this here (don't put it in typography)
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+}
