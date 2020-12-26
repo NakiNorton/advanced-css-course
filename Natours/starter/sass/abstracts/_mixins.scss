@@ -1,0 +1,9 @@
+@mixin clearfix {
+  &::after {
+    // have to specify content property to use, otherwise the pseudo element will not appear on page. Make it an empty string because we don't actually want to SEE the element on page.
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+}
