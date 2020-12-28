@@ -1,0 +1,18 @@
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: .15;
+
+  &__content {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+    // object-fit is similar to background size property. Enabling background to mantain aspect ratio while filling an entire area;
+    object-fit: cover;
+  }
+}
