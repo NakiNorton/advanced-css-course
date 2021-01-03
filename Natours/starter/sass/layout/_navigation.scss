@@ -1,8 +1,8 @@
-#navi-toggle {
-  display: none;
-}
-
 .navigation {
+  &__checkbox {
+    display: none;
+  }
+
   &__button {
     background-color: $color-white;
     height: 7rem;
@@ -28,16 +28,24 @@
     right: 6.5rem;
     background-image: radial-gradient($color-primary-light, $color-primary-dark);
     z-index: 1000;
+    // creating 'animation' -- background will fade in
+    // cubic-bezier allows us to make a custom transition
+    transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
   }
 
   &__nav {
     // covering entire viewport after menu is 'opened'
     height: 100vh;
-    width: 100%;
     position: fixed;
     top: 0;
     right: 0;
     z-index: 1500;
+
+    // hiding the nav menu (until button is clicked)
+    opacity: 0;
+    width: 0;
+    // creating 'animation' -- text will fade in
+    transition: all .8s;
   }
 
   &__list {
@@ -77,9 +85,80 @@
     
     &:hover,
     &:active {
-        background-position: 100%;
-        color: $color-primary;
-        transform: translateX(1rem);
+      background-position: 100%;
+      color: $color-primary;
+      transform: translateX(1rem);
     }
   }
+
+  &__checkbox:checked ~ &__background {
+    // enlarging background to display menu on it after element has been clicked/checked
+    transform: scale(80);
+  }
+
+  &__checkbox:checked ~ &__nav {
+    // making nav menu visible when element is clicked/"checked"
+    opacity: 1;
+    width: 100%;
+  }
+
+  // ICON
+
+  &__icon {
+    position: relative;
+    margin-top: 3.5rem;
+
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-grey-dark-3;
+      display: inline-block;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all .2s;
+    }
+
+    &::before {
+      top: -.8rem;
+    }
+
+    &::after{
+      top: .8rem;
+    }
+  }
+
+  // Makes menu symbol expand on hover
+  &__button:hover &__icon::before {
+    top: -1rem;
+  }
+
+  &__button:hover &__icon::after {
+  top: 1rem;
+  }
+
+  // when the checkbox is selected (menu btn clicked) we are selecting it's adjacent sibling (the button element). From there we can select the buttons child element (the icon)
+
+  // MAKING THE "X" cross to appear if checkbox it checked
+  &__checkbox:checked + &__button &__icon {
+    // removing the middle line in the menu symbol so we can create an "X"
+    background-color: transparent;
+  }
+
+  &__checkbox:checked + &__button &__icon::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  &__checkbox:checked + &__button &__icon::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+  
 }
