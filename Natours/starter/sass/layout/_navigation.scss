@@ -93,13 +93,13 @@
 
   &__checkbox:checked ~ &__background {
     // enlarging background to display menu on it after element has been clicked/checked
-    transform: scale(80);
+    transform: scale(50);
   }
 
   &__checkbox:checked ~ &__nav {
     // making nav menu visible when element is clicked/"checked"
     opacity: 1;
-    width: 100%;
+    width: 50%;
   }
 
   // ICON

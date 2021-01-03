@@ -6,6 +6,12 @@
   left: 0;
   background-color: rgba($color-black, .8);
   z-index: 9999;
+  // hiding elelment until button is clicked
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
+  // the target is the popup ID in the anchor element of the tour buttons.
+  // on once the button is clicked the target pseudo selector is available and triggers this styling
 
   &__content {
     @include absCenter;
@@ -13,26 +19,77 @@
     background-color: $color-white;
     box-shadow: 0 2rem 4rem rgba($color-black, .2);
     border-radius: 3px;
+    display: table;
+    overflow: hidden;
+    opacity: 0;
+    transform: translate(-50%, -50%), scale(.5);
+    // middle number is a delay for 1 second
+    transition: all 1s .2s;
   }
 
   &__left {
-    width: 33.33333333%;
-    float: left;
-    //hello
+    width: 34%;
+    display: table-cell;
 
   }
 
   &__right {
-    width: 66.6666666667;
-    float: left;
+    width: 66%;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 3rem 5rem;
   }
 
-  &__image {
+  &__img {
     display: block;
     width: 100%;
   }
 
   &__text {
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
 
+    // automatically creates two columns to display paragraph
+    -moz-column-count: 2;
+    -moz-column-gap: 4rem;
+    -moz-column-rule: 1px solid $color-grey-light-2;;
+    column-count: 2;
+    column-gap: 4rem; // Note 1rem = 14px because it'll inherit parents font-size
+    column-rule: 1px solid $color-grey-light-2;
+    
+    // automatically adds hyphens if a word has to be split onto two lines.
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  // OPEN STATES
+  &:target {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:target &__content {
+    opacity: 1;
+    transform: translate(-50%, -50%), scale(1);
+  }
+
+  &__close {
+    &:link,
+    &:visited {
+      color: $color-grey-dark;
+      position: absolute;
+      top: 2.5rem;
+      right: 2.5rem;
+      font-size: 3rem;
+      text-decoration: none;
+      display: inline-block;
+      line-height: 1;
+    }
+
+    &:hover {
+      color: $color-primary;
+    }
   }
 }
